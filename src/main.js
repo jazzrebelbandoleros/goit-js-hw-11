@@ -10,7 +10,10 @@ const loaderEl = document.querySelector('.js-loader');
 const onSearchFormSubmit = e => {
   e.preventDefault();
   loaderEl.classList.remove('is-hidden');
-  const searchValue = searchFormEl.elements.user_query.value;
+  const searchValue = searchFormEl.elements.user_query.value.trim();
+  if (searchValue === '') {
+    return;
+  }
   fetchPhotos(searchValue)
     .then(data => {
       if (data.hits.length === 0) {
